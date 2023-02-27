@@ -1,0 +1,6 @@
+{
+  "httpMethod": "GET",
+  "headers": {
+    "authorizationToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyMUBleGFtcGxlLmNvbSIsInVzZXJOYW1lIjoiVGVzdCBVc2VyIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE2Nzc0ODMyNjgsImV4cCI6MTY3NzQ4Njg2OH0.ZTHqWBOKM5CRI1KJqfkJpdqL6crYNH66Ksp1F6gZN2I"
+  }
+}
