@@ -1,5 +1,3 @@
-'use strict';
-
 const jwt = require('jsonwebtoken');
 
 const generatePolicy = (effect, resource, token) => {

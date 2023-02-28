@@ -4,7 +4,7 @@ const AWS = require('aws-sdk');
 const xml2js = require('xml2js');
 const jwt = require('jsonwebtoken');
 
-const sts = new AWS.STS();
+// const sts = new AWS.STS();
 
 const getAttributeValue = (key, attributes) => {
     const attribute = attributes.find(attr => attr['$'].Name === key);
@@ -46,7 +46,7 @@ module.exports.handler = async (event, context) => {
     console.log('Starting SAML parsing...\n');
     console.log(event.body);
     const arr = event.body.split('&RelayState=');
-    const relayState = decodeURIComponent(arr[1]);
+    // const relayState = decodeURIComponent(arr[1]);
     const samlResponse = unescape(arr[0].replace('SAMLResponse=', ''));
     const samlBuffer = Buffer.from(samlResponse, 'base64').toString('ascii');
     const samlObject = await xml2js.parseStringPromise(samlBuffer);
@@ -71,9 +71,10 @@ module.exports.handler = async (event, context) => {
         });
 
         return {
-            statusCode: 301,
-            headers: {
-                Location: `${relayState}?token=${encodeURIComponent(token)}`,
+            statusCode: 200,
+            headers: {},
+            body: {
+                accessToken: token
             }
         };
     } catch(error) {
