@@ -1,5 +1,8 @@
 const xml2js = require('xml2js');
 const jwt = require('jsonwebtoken');
+const {promisify} = require('util');
+
+const signAsync = promisify(jwt.sign);
 
 const getAttributeValue = (key, attributes) => {
     const attribute = attributes.find(attr => attr['$'].Name === key);
@@ -47,7 +50,7 @@ module.exports.handler = async (event, context) => {
     try {
         const userInfo = extractUserInfo(samlObject);
 
-        const token = jwt.sign(userInfo, 'jwt_secret', {
+        const jwtToken = await signAsync(userInfo, 'jwt_secret', {
             expiresIn: 3600,
         });
 
@@ -55,7 +58,7 @@ module.exports.handler = async (event, context) => {
             statusCode: 200,
             headers: {},
             body: JSON.stringify({
-                "accessToken": encodeURIComponent(token)
+                "accessToken": encodeURIComponent(jwtToken)
             })
         };
     } catch(error) {

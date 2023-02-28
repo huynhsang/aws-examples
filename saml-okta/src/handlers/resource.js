@@ -1,9 +1,8 @@
-module.exports.handler = (event, context, callback) => {
-    callback(null, {
+module.exports.handler = async (event) => {
+    console.log(event);
+    return {
         statusCode: 200,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-        },
         body: JSON.stringify(event),
-    });
+        headers: {}
+    };
 };
