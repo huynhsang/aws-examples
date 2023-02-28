@@ -1,12 +1,6 @@
 const fs = require('fs');
 const {SAML} = require('passport-saml');
 
-const createRequest = event => ({
-    query: {
-        RelayState: event.queryStringParameters.returnUrl,
-    },
-});
-
 module.exports.handler = async (event, context, callback) => {
     console.log('Logging in...');
 
@@ -20,7 +14,7 @@ module.exports.handler = async (event, context, callback) => {
         // audience: process.env.SAML_CALLBACK_URL,
         // providerName: 'AWS SAML Lambda Example',
     });
-    const url = await samlParser.getAuthorizeUrlAsync(createRequest(event));
+    const url = await samlParser.getAuthorizeUrlAsync();
 
     const response = {
         statusCode: 301,
